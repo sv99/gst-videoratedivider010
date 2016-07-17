@@ -48,6 +48,8 @@
  *
  * Simple videorate downsampler. Passthrough only factored frames all other silenly dropped.
  *
+ * Default property #GstVideoDivider:factor is 2, passthrough each second frame.
+ *
  * <refsect2>
  * <title>Example launch line</title>
  * |[
@@ -84,12 +86,10 @@ enum {
     LAST_SIGNAL
 };
 
-#define DEFAULT_SILENT FALSE
 #define DEFAULT_FACTOR 2
 
 enum {
     PROP_0,
-    PROP_SILENT,
     PROP_FACTOR
     /* FILL ME */
 };
@@ -157,9 +157,6 @@ gst_video_rate_divider_class_init (GstVideoRateDividerClass *klass)
   base_class->transform_ip =
       GST_DEBUG_FUNCPTR (gst_video_rate_divider_transform_ip);
 
-  g_object_class_install_property (gobject_class, PROP_SILENT,
-      g_param_spec_boolean ("silent", "Silent", "Produce verbose output ?",
-          DEFAULT_SILENT, G_PARAM_READWRITE));
   g_object_class_install_property (gobject_class, PROP_FACTOR,
       g_param_spec_uint64 ("factor", "Factor", "Downsampling factor",
           1, G_MAXUINT64, DEFAULT_FACTOR, G_PARAM_READWRITE));
@@ -176,7 +173,6 @@ gst_video_rate_divider_init (GstVideoRateDivider *filter,
 {
   GST_DEBUG ("gst_video_rate_divider_init");
 
-  filter->silent = DEFAULT_SILENT;
   filter->first_frame = TRUE;
   filter->factor = 2;
   filter->from_rate_numerator = -1;
@@ -279,9 +275,6 @@ gst_video_rate_divider_set_property (GObject *object, guint prop_id,
   GST_OBJECT_LOCK (filter);
   switch (prop_id)
     {
-      case PROP_SILENT:
-        filter->silent = g_value_get_boolean (value);
-        break;
       case PROP_FACTOR:
         filter->factor = g_value_get_uint64 (value);
         break;
@@ -301,9 +294,6 @@ gst_video_rate_divider_get_property (GObject *object, guint prop_id,
   GST_OBJECT_LOCK (filter);
   switch (prop_id)
     {
-      case PROP_SILENT:
-        g_value_set_boolean (value, filter->silent);
-        break;
       case PROP_FACTOR:
         g_value_set_uint64 (value, filter->factor);
         break;
