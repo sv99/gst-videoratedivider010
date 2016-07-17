@@ -46,7 +46,7 @@
 /**
  * SECTION:element-videoratedivider
  *
- * Simple videorate downsampler. Passthrough only factored frames all other silenly dropped.
+ * Simple videorate downsampler. Passthrough only factored frames all other silently dropped.
  *
  * Default property #GstVideoDivider:factor is 2, passthrough each second frame.
  *
@@ -133,7 +133,7 @@ gst_video_rate_divider_base_init (gpointer gclass)
   gst_element_class_set_details_simple (element_class,
       "Simple videorate downsampler",
       "Filter/Video",
-      "Passthrough only factored frames all other quiet dropped.",
+      "Passthrough only factored frames all other silently dropped.",
       "S. Volkov <sv99@inbox.ru>");
 
   gst_element_class_add_static_pad_template (element_class, &src_factory);

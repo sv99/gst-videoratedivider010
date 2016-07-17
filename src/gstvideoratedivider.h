@@ -75,7 +75,6 @@ struct _GstVideoRateDivider
   gint from_rate_numerator, from_rate_denominator;
 
   /* properties */
-  gboolean silent;
   guint64 factor;              /* Downsampling factor */
 
   volatile gint _counter;

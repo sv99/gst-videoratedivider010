@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 project(libgstvideoratedivider)
-set(VERSION 0.0.1)
+set(VERSION 0.1.0)
 
 set(SRC_DIR ${PROJECT_SOURCE_DIR}/src)
 
