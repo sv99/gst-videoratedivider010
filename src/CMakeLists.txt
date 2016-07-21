@@ -13,6 +13,6 @@ target_link_libraries(gstvideoratedivider
         ${GLIB2_LIBRARIES} ${GSTRM_LIBRARIES} ${GSTRMAPP_LIBRARIES})
 
 install(TARGETS gstvideoratedivider
-        LIBRARY DESTINATION lib
+        LIBRARY DESTINATION lib/gstreamer-0.10
         ARCHIVE DESTINATION lib
         )
